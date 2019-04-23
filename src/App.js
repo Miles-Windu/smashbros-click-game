@@ -15,82 +15,39 @@ class App extends Component {
     message: "Click an image to begin!"
   }
 
-  handleStateChange = event => {
-
-    const {name, value} = event.target;
-
-    this.setState({
-      [name]: value
-    })
+  // makes sure that the components are mounted so state can be established. 
+  componentDidMount() {
+    this.setState({ Bros: shuffle(this.state.Bros) });
   }
   
-  // every time an image is clicked, the value of "count" and "topScore" in the state object incrememnt up by one. 
-  // gameOn = id => {
-
-  //   // finds the ID of the image that was clicked and then stored in a variable
-  //   const choice = this.state.Bros.findIndex(thumbnail => thumbnail.id === id);
-
-
-
-
-
-
-
-
-
-
-
-
-  //   // SETS THE TOP SCORE TO MATCH THE HIGHEST SCORE OF THE CURRENT SESSION. 
-  //   if (this.state.count > this.state.topScore) {
-  //     this.setState({ topScore: this.state.count });
-  //   }
-
-
-
-
-
-  //   // LOSER
-  //   //=====================================================================================================
-  //   // if the "clicked" property of the ID is tru then the game is over and everything will be set back to 0
-  //   if(this.state.Bros[choice].clicked){
-
-  //     console.log(choice)
-      
-  //     this.setState({
-  //     count: 0,
-  //     message: "Already been clicked! Try again!"
-  //   })
-  //   }
-  //   // Bros: shuffle(this.state.pokemon.map(bros => { 
-  //   //   bros.clicked = false; 
-  //   //   return bros 
-  //   // })), 
-    
-  //   console.log('click recorded')
-
-  // };
-
+  // logic for the game
   gameOn = id => {
     
+    // saves the index and id of the clicked image into an array for easy reference.
     const choice = this.state.Bros.findIndex(bro => bro.id === id);
 
     
+    // verifies if the index chosen has been clicked already...
     if (this.state.Bros[choice].clicked) {
       
+      // if it has, then set the state of "message" to let them know that it has already been picked. 
       this.setState({
         message: "Already Picked! Try Again!",
-        pokemon: shuffle(this.state.Bros.map(bro => { bro.clicked = false; return bro })),
-        score: 0
+
+        // shuffles the array in the DOM
+        Bros: shuffle(this.state.Bros.map(bro => { bro.clicked = false; return bro })),
+
+        // resets the score back to 0
+        count: 0
       });
 
-      
+      // as the count increments by 1, the topScore will reflect the score as long as score is greater than the topScore... 
       if (this.state.count > this.state.topScore) {
-        this.setState({ topScore: this.state.count });
-      }
+      this.setState({ topScore: this.state.count });
     }
-    else {
+    }else {
       
+      // maps through the array and changes the "clicked" property of the returned id to be true. 
       const tempState = this.state.Bros.map(bro => {
         if (bro.id === id) {
           bro.clicked = true;
@@ -102,16 +59,18 @@ class App extends Component {
       this.setState({
         message: "Winning!",
         count: this.state.count + 1,
+
+        // shuffles the array keeping the "clicked" property of the id's that are true... 
         Bros: shuffle(tempState)
       });
     }
-    // this.setState({ pokemon: shuffle(this.state.pokemon) });
+
+    if(this.state.count === 12){
+      alert("Congratulations! You have a pretty bomb memory!")
+    }
   }
 
-  componentDidMount() {
-    this.setState({ Bros: shuffle(this.state.Bros) });
 
-  }
 
   // render method to display the return to the DOM. 
   render() {
@@ -122,7 +81,6 @@ class App extends Component {
       status={this.state.message}
       count={this.state.count}
       topScore={this.state.topScore}
-      gameOn={this.gameOn}
       />
       <Jumbotron />
       <div className="container mx-auto mb-5 p-3">
