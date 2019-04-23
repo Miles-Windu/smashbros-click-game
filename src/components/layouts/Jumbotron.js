@@ -4,12 +4,14 @@ function Jumbotron(){
     let divStyle = {
         width: "100%",
         height: "auto",
-        background: "transparent",
-        color: "yellow"
+        backgroundColor: "white",
+        color: "Red",
+        borderRadius: "2000px",
+        opacity: ".7"
     }
 
-    return <div className="jumbotron jumbotron-fluid mb-0" style={divStyle}>
-    <div className="container-fluid" >
+    return <div className="container mt-1 p-5" >
+    <div className="jumbotron" style={divStyle} >
       <h1 className="text-center">Super Smash Bros Edition!</h1>
       <p className="lead text-center">Click through the characters. Don't click the same character twice or you'll lose!</p>
     </div>

@@ -55,9 +55,12 @@ class App extends Component {
         return bro
       })
 
-      // increment score by 1
       this.setState({
+
+        // as long as they don't repeat an image, the message will display "Winning!"
         message: "Winning!",
+
+        // increments count by 1
         count: this.state.count + 1,
 
         // shuffles the array keeping the "clicked" property of the id's that are true... 
@@ -65,11 +68,9 @@ class App extends Component {
       });
     }
 
-    if(this.state.count === 12){
-      alert("Congratulations! You have a pretty bomb memory!")
-    }
+    
   }
-
+    
 
 
   // render method to display the return to the DOM. 
@@ -83,8 +84,8 @@ class App extends Component {
       topScore={this.state.topScore}
       />
       <Jumbotron />
-      <div className="container mx-auto mb-5 p-3">
-        <div className="row mx-auto">
+      <div className="container mt-0 mb-5 p-0">
+        <div className="row justify-content-center my-3">
     
         {/* Loops through the Bros array created in smashbros.json and makes a thumbnail for each member in the array */}
         {/* props are passed with the functions above */}

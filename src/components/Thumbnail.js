@@ -6,6 +6,7 @@ function Thumbnail(props){
         maxWidth: "200px",
         height: "200px",
         cursor: "pointer",
+        boxShadow: "10px 10px 5px gray"
     }} />
 }
 

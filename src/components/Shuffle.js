@@ -1,13 +1,9 @@
-//  the Fisher-Yates (aka Knuth) Shuffle
-// https://github.com/coolaj86/knuth-shuffle
+// from google
+// using their shuffle javascript function and exporting it to be used in my main App.js.
 function shuffle(props) {
-    // reset shuffledArray array
-    // console.log("this.state.pokemon: ", props)
+
     const shuffledArray = props;
-    // const numCards = 12;
-    // for (var i = 0; i < numCards; i++) {
-    //     shuffledArray.push(i);
-    // }
+
     var randomIndex;
     var tempIndex;
     // go from 11-0; randomize current i; 
@@ -17,8 +13,7 @@ function shuffle(props) {
         shuffledArray[i] = shuffledArray[randomIndex]; // copy random index to current index i in array
         shuffledArray[randomIndex] = tempIndex; // copy temp index to random index
     }
-    // console.log("Shuffled Array: ", shuffledArray);
-    
+
     return shuffledArray;
 }
 
